@@ -1,0 +1,29 @@
+{
+    "train_config": {
+        "kf" : 10,
+        "epochs": 300,
+        "batch_size": 512,
+        "seed": 8971,
+        "patience" : 50,
+        "lr" : 5e-4,
+        "weight_decay": 1e-5
+    },
+
+    "model": "SAPNet",
+    "dataset": "PROTEINS",
+    "data_dir" : "datasets/",
+    "out_dir": "out/",
+
+     "net_params": {
+       "gcn_num": 2,
+       "dropout": 0.2,
+       "gcn_droupt": 0.0,
+       "att_droupt": 0.2,
+       "graph_norm": true,
+       "sz_c": 2,
+       "h_dim": 128,
+       "g_name": "GraphSAGE",
+       "s_l_nums": 2,
+       "alpha": 0.2
+     }
+}

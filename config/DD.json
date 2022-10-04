@@ -1,0 +1,8 @@
+{
+  "alpha": 0.2,
+  "beta": 0.2,
+  "dropout": 0.0,
+  "gcn_num": 3,
+  "sz_c": 3,
+  "s_l_nums": 2
+}

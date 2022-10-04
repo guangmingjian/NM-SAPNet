@@ -1,0 +1,474 @@
+Dataset: NCI1,
+Model: SAPNet
+
+params={'kf': 10, 'epochs': 300, 'batch_size': 512, 'seed': 8971, 'patience': 50, 'lr': 0.0005, 'weight_decay': 1e-05}
+
+net_params={'gcn_num': 2, 'dropout': 0.1, 'gcn_droupt': 0.0, 'att_droupt': 0.2, 'graph_norm': True, 'sz_c': 2, 'h_dim': 128, 'g_name': 'GraphSAGE', 's_l_nums': 2, 'alpha': 0.8, 'SMUFlag': True, 'beta': 0.8, 'device': 'cuda:0', 'in_dim': 37, 'out_dim': 2}
+
+model=SAPNet(
+  (fea_embed): Sequential(
+    (0): Linear(in_features=37, out_features=64, bias=True)
+    (1): Linear(in_features=64, out_features=64, bias=True)
+  )
+  (mgl): MultiGCNLayers(
+    (gcn_layer): ModuleList(
+      (0): ModuleList(
+        (0): SAGEConv(64, 64)
+        (1): Dropout(p=0.0, inplace=False)
+        (2): GraphSizeNorm()
+        (3): BatchNorm(64)
+        (4): ReLU()
+        (5): SAGEConv(64, 64)
+        (6): Dropout(p=0.0, inplace=False)
+        (7): GraphSizeNorm()
+        (8): BatchNorm(64)
+        (9): ReLU()
+      )
+      (1): ModuleList(
+        (0): SAGEConv(64, 64)
+        (1): Dropout(p=0.0, inplace=False)
+        (2): GraphSizeNorm()
+        (3): BatchNorm(64)
+        (4): ReLU()
+        (5): SAGEConv(64, 64)
+        (6): Dropout(p=0.0, inplace=False)
+        (7): GraphSizeNorm()
+        (8): BatchNorm(64)
+        (9): ReLU()
+      )
+    )
+    (layer_norm): LayerNorm((64,), eps=1e-06, elementwise_affine=True)
+  )
+  (smus): ModuleList(
+    (0): Attv2(
+      (trans_lin): ModuleList(
+        (0): Linear(in_features=128, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      )
+      (att_lin): Linear(in_features=128, out_features=1, bias=True)
+      (dropout): Dropout(p=0.2, inplace=False)
+      (layer_norm): LayerNorm((64,), eps=1e-06, elementwise_affine=True)
+    )
+    (1): Attv2(
+      (trans_lin): ModuleList(
+        (0): Linear(in_features=128, out_features=64, bias=True)
+        (1): Linear(in_features=64, out_features=64, bias=True)
+      )
+      (att_lin): Linear(in_features=128, out_features=1, bias=True)
+      (dropout): Dropout(p=0.2, inplace=False)
+      (layer_norm): LayerNorm((64,), eps=1e-06, elementwise_affine=True)
+    )
+  )
+  (vlr): VLRLayers(
+    (k_fc): Linear(in_features=64, out_features=32, bias=True)
+    (v_fc): Linear(in_features=64, out_features=32, bias=True)
+    (dropout): Dropout(p=0.2, inplace=False)
+    (layer_norm): LayerNorm((32,), eps=1e-06, elementwise_affine=True)
+  )
+  (cnn_net): LeNet1(
+    (dropout): Dropout(p=0.1, inplace=False)
+    (fc1): Linear(in_features=450, out_features=32, bias=True)
+    (fc2): Linear(in_features=32, out_features=2, bias=True)
+    (conv1): Conv2d(2, 16, kernel_size=(5, 5), stride=(1, 1))
+    (conv2): Conv2d(16, 18, kernel_size=(5, 5), stride=(1, 1))
+  )
+)
+
+Model saved at epoch 1 ,val_loss is -0.15002645552158356, val_acc is 0.49148418491484186 
+Model saved at epoch 2 ,val_loss is -0.18819111585617065, val_acc is 0.5158150851581509 
+{'fold': 1, 'epoch': 10, 'train_loss': 0.122, 'val_loss': -0.48, 'train_acc': 0.663, 'val_acc': 0.511, 'mean_acc': nan}
+Model saved at epoch 12 ,val_loss is -0.30328115820884705, val_acc is 0.6253041362530414 
+Model saved at epoch 13 ,val_loss is -0.2908593714237213, val_acc is 0.6326034063260341 
+Model saved at epoch 16 ,val_loss is -0.6754567623138428, val_acc is 0.6763990267639902 
+Model saved at epoch 17 ,val_loss is -0.7821905016899109, val_acc is 0.7031630170316302 
+Model saved at epoch 18 ,val_loss is -0.8740866184234619, val_acc is 0.7153284671532847 
+Model saved at epoch 19 ,val_loss is -0.8719513416290283, val_acc is 0.732360097323601 
+{'fold': 1, 'epoch': 20, 'train_loss': 0.109, 'val_loss': -0.909, 'train_acc': 0.728, 'val_acc': 0.737, 'mean_acc': nan}
+Model saved at epoch 20 ,val_loss is -0.9088473916053772, val_acc is 0.7372262773722628 
+Model saved at epoch 21 ,val_loss is -0.876506507396698, val_acc is 0.7396593673965937 
+Model saved at epoch 22 ,val_loss is -0.9157493114471436, val_acc is 0.7420924574209246 
+Model saved at epoch 24 ,val_loss is -0.7495627999305725, val_acc is 0.7469586374695864 
+Model saved at epoch 26 ,val_loss is -0.9262117743492126, val_acc is 0.7518248175182481 
+Model saved at epoch 27 ,val_loss is -0.9004427790641785, val_acc is 0.7615571776155717 
+{'fold': 1, 'epoch': 30, 'train_loss': 0.102, 'val_loss': -0.927, 'train_acc': 0.757, 'val_acc': 0.757, 'mean_acc': nan}
+Model saved at epoch 31 ,val_loss is -0.8829737901687622, val_acc is 0.7664233576642335 
+Model saved at epoch 32 ,val_loss is -0.9217504262924194, val_acc is 0.7688564476885644 
+Model saved at epoch 36 ,val_loss is -1.096997857093811, val_acc is 0.7785888077858881 
+{'fold': 1, 'epoch': 40, 'train_loss': 0.097, 'val_loss': -1.087, 'train_acc': 0.774, 'val_acc': 0.754, 'mean_acc': nan}
+Model saved at epoch 42 ,val_loss is -1.143218755722046, val_acc is 0.7834549878345499 
+Model saved at epoch 43 ,val_loss is -1.105674386024475, val_acc is 0.7956204379562044 
+Model saved at epoch 44 ,val_loss is -1.1587904691696167, val_acc is 0.7980535279805353 
+Model saved at epoch 46 ,val_loss is -1.1699154376983643, val_acc is 0.8004866180048662 
+{'fold': 1, 'epoch': 50, 'train_loss': 0.088, 'val_loss': -1.206, 'train_acc': 0.808, 'val_acc': 0.791, 'mean_acc': nan}
+Model saved at epoch 57 ,val_loss is -1.3845977783203125, val_acc is 0.8223844282238443 
+{'fold': 1, 'epoch': 60, 'train_loss': 0.086, 'val_loss': -1.134, 'train_acc': 0.816, 'val_acc': 0.774, 'mean_acc': nan}
+Model saved at epoch 63 ,val_loss is -1.1413207054138184, val_acc is 0.8248175182481752 
+Model saved at epoch 65 ,val_loss is -1.357858419418335, val_acc is 0.8272506082725061 
+Model saved at epoch 69 ,val_loss is -1.320539951324463, val_acc is 0.8369829683698297 
+{'fold': 1, 'epoch': 70, 'train_loss': 0.084, 'val_loss': -1.219, 'train_acc': 0.819, 'val_acc': 0.818, 'mean_acc': nan}
+{'fold': 1, 'epoch': 80, 'train_loss': 0.074, 'val_loss': -1.421, 'train_acc': 0.845, 'val_acc': 0.808, 'mean_acc': nan}
+Model saved at epoch 85 ,val_loss is -1.3487262725830078, val_acc is 0.8418491484184915 
+{'fold': 1, 'epoch': 90, 'train_loss': 0.07, 'val_loss': -1.545, 'train_acc': 0.854, 'val_acc': 0.825, 'mean_acc': nan}
+{'fold': 1, 'epoch': 100, 'train_loss': 0.067, 'val_loss': -1.423, 'train_acc': 0.859, 'val_acc': 0.827, 'mean_acc': nan}
+{'fold': 1, 'epoch': 110, 'train_loss': 0.065, 'val_loss': -1.463, 'train_acc': 0.865, 'val_acc': 0.74, 'mean_acc': nan}
+Model saved at epoch 113 ,val_loss is -1.4502464532852173, val_acc is 0.8442822384428224 
+Model saved at epoch 114 ,val_loss is -1.5017162561416626, val_acc is 0.8491484184914841 
+Model saved at epoch 117 ,val_loss is -1.4890415668487549, val_acc is 0.8564476885644768 
+{'fold': 1, 'epoch': 120, 'train_loss': 0.062, 'val_loss': -1.644, 'train_acc': 0.877, 'val_acc': 0.822, 'mean_acc': nan}
+{'fold': 1, 'epoch': 130, 'train_loss': 0.062, 'val_loss': -1.492, 'train_acc': 0.871, 'val_acc': 0.815, 'mean_acc': nan}
+{'fold': 1, 'epoch': 140, 'train_loss': 0.055, 'val_loss': -1.758, 'train_acc': 0.893, 'val_acc': 0.803, 'mean_acc': nan}
+{'fold': 1, 'epoch': 150, 'train_loss': 0.053, 'val_loss': -1.796, 'train_acc': 0.893, 'val_acc': 0.793, 'mean_acc': nan}
+{'fold': 1, 'epoch': 160, 'train_loss': 0.05, 'val_loss': -1.687, 'train_acc': 0.905, 'val_acc': 0.803, 'mean_acc': nan}
+For fold 1, test acc: 0.839416
+
+Model saved at epoch 1 ,val_loss is 0.06006276607513428, val_acc is 0.45742092457420924 
+Model saved at epoch 2 ,val_loss is 0.05540470778942108, val_acc is 0.5742092457420924 
+Model saved at epoch 7 ,val_loss is 0.060960810631513596, val_acc is 0.5790754257907542 
+{'fold': 2, 'epoch': 10, 'train_loss': 0.122, 'val_loss': 0.115, 'train_acc': 0.678, 'val_acc': 0.572, 'mean_acc': 0.839}
+Model saved at epoch 13 ,val_loss is 0.09046446532011032, val_acc is 0.5815085158150851 
+Model saved at epoch 14 ,val_loss is 0.00990157388150692, val_acc is 0.6155717761557178 
+Model saved at epoch 15 ,val_loss is -0.07668288797140121, val_acc is 0.6642335766423357 
+Model saved at epoch 19 ,val_loss is -0.33779650926589966, val_acc is 0.708029197080292 
+{'fold': 2, 'epoch': 20, 'train_loss': 0.11, 'val_loss': -0.262, 'train_acc': 0.724, 'val_acc': 0.764, 'mean_acc': 0.839}
+Model saved at epoch 20 ,val_loss is -0.2621731460094452, val_acc is 0.7639902676399026 
+Model saved at epoch 29 ,val_loss is -0.382811576128006, val_acc is 0.781021897810219 
+{'fold': 2, 'epoch': 30, 'train_loss': 0.103, 'val_loss': -0.367, 'train_acc': 0.748, 'val_acc': 0.783, 'mean_acc': 0.839}
+Model saved at epoch 30 ,val_loss is -0.3665630519390106, val_acc is 0.7834549878345499 
+{'fold': 2, 'epoch': 40, 'train_loss': 0.096, 'val_loss': -0.429, 'train_acc': 0.778, 'val_acc': 0.779, 'mean_acc': 0.839}
+Model saved at epoch 41 ,val_loss is -0.4076893627643585, val_acc is 0.7883211678832117 
+Model saved at epoch 42 ,val_loss is -0.443309485912323, val_acc is 0.7907542579075426 
+{'fold': 2, 'epoch': 50, 'train_loss': 0.091, 'val_loss': -0.589, 'train_acc': 0.795, 'val_acc': 0.769, 'mean_acc': 0.839}
+Model saved at epoch 54 ,val_loss is -0.55841463804245, val_acc is 0.8004866180048662 
+Model saved at epoch 56 ,val_loss is -0.5673642754554749, val_acc is 0.8077858880778589 
+{'fold': 2, 'epoch': 60, 'train_loss': 0.094, 'val_loss': -0.491, 'train_acc': 0.778, 'val_acc': 0.774, 'mean_acc': 0.839}
+Model saved at epoch 63 ,val_loss is -0.5535930395126343, val_acc is 0.829683698296837 
+{'fold': 2, 'epoch': 70, 'train_loss': 0.09, 'val_loss': -0.615, 'train_acc': 0.794, 'val_acc': 0.825, 'mean_acc': 0.839}
+Model saved at epoch 74 ,val_loss is -0.632652997970581, val_acc is 0.8321167883211679 
+{'fold': 2, 'epoch': 80, 'train_loss': 0.078, 'val_loss': -0.721, 'train_acc': 0.834, 'val_acc': 0.786, 'mean_acc': 0.839}
+{'fold': 2, 'epoch': 90, 'train_loss': 0.075, 'val_loss': -0.727, 'train_acc': 0.838, 'val_acc': 0.844, 'mean_acc': 0.839}
+Model saved at epoch 90 ,val_loss is -0.7267972826957703, val_acc is 0.8442822384428224 
+{'fold': 2, 'epoch': 100, 'train_loss': 0.072, 'val_loss': -0.787, 'train_acc': 0.849, 'val_acc': 0.757, 'mean_acc': 0.839}
+Model saved at epoch 104 ,val_loss is -0.7611459493637085, val_acc is 0.8467153284671532 
+{'fold': 2, 'epoch': 110, 'train_loss': 0.065, 'val_loss': -0.985, 'train_acc': 0.861, 'val_acc': 0.786, 'mean_acc': 0.839}
+{'fold': 2, 'epoch': 120, 'train_loss': 0.063, 'val_loss': -1.015, 'train_acc': 0.868, 'val_acc': 0.856, 'mean_acc': 0.839}
+Model saved at epoch 120 ,val_loss is -1.0153741836547852, val_acc is 0.8564476885644768 
+{'fold': 2, 'epoch': 130, 'train_loss': 0.062, 'val_loss': -1.025, 'train_acc': 0.872, 'val_acc': 0.832, 'mean_acc': 0.839}
+Model saved at epoch 137 ,val_loss is -1.0851024389266968, val_acc is 0.8613138686131386 
+{'fold': 2, 'epoch': 140, 'train_loss': 0.057, 'val_loss': -1.126, 'train_acc': 0.885, 'val_acc': 0.832, 'mean_acc': 0.839}
+{'fold': 2, 'epoch': 150, 'train_loss': 0.058, 'val_loss': -1.111, 'train_acc': 0.887, 'val_acc': 0.815, 'mean_acc': 0.839}
+{'fold': 2, 'epoch': 160, 'train_loss': 0.056, 'val_loss': -1.172, 'train_acc': 0.887, 'val_acc': 0.827, 'mean_acc': 0.839}
+{'fold': 2, 'epoch': 170, 'train_loss': 0.052, 'val_loss': -1.177, 'train_acc': 0.891, 'val_acc': 0.835, 'mean_acc': 0.839}
+{'fold': 2, 'epoch': 180, 'train_loss': 0.048, 'val_loss': -1.286, 'train_acc': 0.904, 'val_acc': 0.827, 'mean_acc': 0.839}
+For fold 2, test acc: 0.805353
+
+Model saved at epoch 1 ,val_loss is -0.020935380831360817, val_acc is 0.46472019464720193 
+Model saved at epoch 4 ,val_loss is -0.034309253096580505, val_acc is 0.46715328467153283 
+Model saved at epoch 9 ,val_loss is 0.02466796524822712, val_acc is 0.46958637469586373 
+{'fold': 3, 'epoch': 10, 'train_loss': 0.119, 'val_loss': 0.05, 'train_acc': 0.695, 'val_acc': 0.465, 'mean_acc': 0.822}
+Model saved at epoch 13 ,val_loss is 0.004249997902661562, val_acc is 0.51338199513382 
+Model saved at epoch 14 ,val_loss is -0.026931647211313248, val_acc is 0.5766423357664233 
+Model saved at epoch 16 ,val_loss is -0.16266927123069763, val_acc is 0.6472019464720195 
+Model saved at epoch 17 ,val_loss is -0.21859075129032135, val_acc is 0.6666666666666666 
+Model saved at epoch 19 ,val_loss is -0.264583557844162, val_acc is 0.6739659367396593 
+{'fold': 3, 'epoch': 20, 'train_loss': 0.106, 'val_loss': -0.302, 'train_acc': 0.745, 'val_acc': 0.696, 'mean_acc': 0.822}
+Model saved at epoch 20 ,val_loss is -0.3019641637802124, val_acc is 0.6958637469586375 
+Model saved at epoch 21 ,val_loss is -0.34013456106185913, val_acc is 0.7128953771289538 
+{'fold': 3, 'epoch': 30, 'train_loss': 0.103, 'val_loss': -0.421, 'train_acc': 0.752, 'val_acc': 0.676, 'mean_acc': 0.822}
+Model saved at epoch 32 ,val_loss is -0.4822457432746887, val_acc is 0.7153284671532847 
+Model saved at epoch 33 ,val_loss is -0.5049889087677002, val_acc is 0.7177615571776156 
+Model saved at epoch 34 ,val_loss is -0.4576990008354187, val_acc is 0.7518248175182481 
+{'fold': 3, 'epoch': 40, 'train_loss': 0.092, 'val_loss': -0.518, 'train_acc': 0.785, 'val_acc': 0.718, 'mean_acc': 0.822}
+Model saved at epoch 42 ,val_loss is -0.44276025891304016, val_acc is 0.7615571776155717 
+{'fold': 3, 'epoch': 50, 'train_loss': 0.088, 'val_loss': -0.457, 'train_acc': 0.801, 'val_acc': 0.759, 'mean_acc': 0.822}
+Model saved at epoch 54 ,val_loss is -0.49238136410713196, val_acc is 0.7639902676399026 
+{'fold': 3, 'epoch': 60, 'train_loss': 0.081, 'val_loss': -0.613, 'train_acc': 0.818, 'val_acc': 0.745, 'mean_acc': 0.822}
+{'fold': 3, 'epoch': 70, 'train_loss': 0.078, 'val_loss': -0.647, 'train_acc': 0.835, 'val_acc': 0.715, 'mean_acc': 0.822}
+{'fold': 3, 'epoch': 80, 'train_loss': 0.073, 'val_loss': -0.703, 'train_acc': 0.848, 'val_acc': 0.727, 'mean_acc': 0.822}
+Model saved at epoch 87 ,val_loss is -0.682159960269928, val_acc is 0.7761557177615572 
+{'fold': 3, 'epoch': 90, 'train_loss': 0.072, 'val_loss': -0.761, 'train_acc': 0.845, 'val_acc': 0.735, 'mean_acc': 0.822}
+Model saved at epoch 92 ,val_loss is -0.5990120768547058, val_acc is 0.781021897810219 
+{'fold': 3, 'epoch': 100, 'train_loss': 0.067, 'val_loss': -0.825, 'train_acc': 0.86, 'val_acc': 0.73, 'mean_acc': 0.822}
+{'fold': 3, 'epoch': 110, 'train_loss': 0.064, 'val_loss': -0.803, 'train_acc': 0.865, 'val_acc': 0.766, 'mean_acc': 0.822}
+{'fold': 3, 'epoch': 120, 'train_loss': 0.059, 'val_loss': -0.86, 'train_acc': 0.877, 'val_acc': 0.762, 'mean_acc': 0.822}
+{'fold': 3, 'epoch': 130, 'train_loss': 0.055, 'val_loss': -0.88, 'train_acc': 0.889, 'val_acc': 0.754, 'mean_acc': 0.822}
+{'fold': 3, 'epoch': 140, 'train_loss': 0.059, 'val_loss': -0.875, 'train_acc': 0.882, 'val_acc': 0.747, 'mean_acc': 0.822}
+Model saved at epoch 142 ,val_loss is -0.9931195974349976, val_acc is 0.7883211678832117 
+{'fold': 3, 'epoch': 150, 'train_loss': 0.051, 'val_loss': -0.969, 'train_acc': 0.895, 'val_acc': 0.779, 'mean_acc': 0.822}
+{'fold': 3, 'epoch': 160, 'train_loss': 0.06, 'val_loss': -0.946, 'train_acc': 0.872, 'val_acc': 0.764, 'mean_acc': 0.822}
+{'fold': 3, 'epoch': 170, 'train_loss': 0.052, 'val_loss': -1.017, 'train_acc': 0.889, 'val_acc': 0.769, 'mean_acc': 0.822}
+{'fold': 3, 'epoch': 180, 'train_loss': 0.048, 'val_loss': -1.033, 'train_acc': 0.902, 'val_acc': 0.791, 'mean_acc': 0.822}
+Model saved at epoch 180 ,val_loss is -1.0330833196640015, val_acc is 0.7907542579075426 
+{'fold': 3, 'epoch': 190, 'train_loss': 0.05, 'val_loss': -1.188, 'train_acc': 0.901, 'val_acc': 0.766, 'mean_acc': 0.822}
+Model saved at epoch 199 ,val_loss is -1.2734652757644653, val_acc is 0.805352798053528 
+{'fold': 3, 'epoch': 200, 'train_loss': 0.043, 'val_loss': -1.23, 'train_acc': 0.921, 'val_acc': 0.769, 'mean_acc': 0.822}
+{'fold': 3, 'epoch': 210, 'train_loss': 0.041, 'val_loss': -1.299, 'train_acc': 0.92, 'val_acc': 0.793, 'mean_acc': 0.822}
+{'fold': 3, 'epoch': 220, 'train_loss': 0.039, 'val_loss': -1.275, 'train_acc': 0.923, 'val_acc': 0.779, 'mean_acc': 0.822}
+{'fold': 3, 'epoch': 230, 'train_loss': 0.04, 'val_loss': -1.275, 'train_acc': 0.921, 'val_acc': 0.781, 'mean_acc': 0.822}
+{'fold': 3, 'epoch': 240, 'train_loss': 0.038, 'val_loss': -1.322, 'train_acc': 0.922, 'val_acc': 0.788, 'mean_acc': 0.822}
+{'fold': 3, 'epoch': 250, 'train_loss': 0.035, 'val_loss': -1.384, 'train_acc': 0.935, 'val_acc': 0.791, 'mean_acc': 0.822}
+For fold 3, test acc: 0.788321
+
+Model saved at epoch 1 ,val_loss is -0.0677424743771553, val_acc is 0.49148418491484186 
+Model saved at epoch 2 ,val_loss is -0.07301773130893707, val_acc is 0.5060827250608273 
+Model saved at epoch 3 ,val_loss is -0.10510207712650299, val_acc is 0.5085158150851582 
+Model saved at epoch 4 ,val_loss is -0.1351574957370758, val_acc is 0.51338199513382 
+{'fold': 4, 'epoch': 10, 'train_loss': 0.125, 'val_loss': -0.379, 'train_acc': 0.653, 'val_acc': 0.509, 'mean_acc': 0.811}
+Model saved at epoch 11 ,val_loss is -0.3942520320415497, val_acc is 0.5450121654501217 
+Model saved at epoch 12 ,val_loss is -0.40759679675102234, val_acc is 0.5766423357664233 
+Model saved at epoch 13 ,val_loss is -0.4656684696674347, val_acc is 0.5790754257907542 
+Model saved at epoch 15 ,val_loss is -0.5783979296684265, val_acc is 0.6423357664233577 
+{'fold': 4, 'epoch': 20, 'train_loss': 0.11, 'val_loss': -0.78, 'train_acc': 0.725, 'val_acc': 0.676, 'mean_acc': 0.811}
+Model saved at epoch 20 ,val_loss is -0.7797157764434814, val_acc is 0.6763990267639902 
+Model saved at epoch 26 ,val_loss is -0.7348459959030151, val_acc is 0.6982968369829684 
+Model saved at epoch 27 ,val_loss is -0.7886037230491638, val_acc is 0.7347931873479319 
+{'fold': 4, 'epoch': 30, 'train_loss': 0.1, 'val_loss': -0.862, 'train_acc': 0.766, 'val_acc': 0.679, 'mean_acc': 0.811}
+Model saved at epoch 37 ,val_loss is -0.8438950181007385, val_acc is 0.7396593673965937 
+{'fold': 4, 'epoch': 40, 'train_loss': 0.101, 'val_loss': -0.943, 'train_acc': 0.769, 'val_acc': 0.732, 'mean_acc': 0.811}
+Model saved at epoch 46 ,val_loss is -0.9539711475372314, val_acc is 0.7493917274939172 
+{'fold': 4, 'epoch': 50, 'train_loss': 0.091, 'val_loss': -0.882, 'train_acc': 0.796, 'val_acc': 0.701, 'mean_acc': 0.811}
+Model saved at epoch 53 ,val_loss is -0.9201160669326782, val_acc is 0.7566909975669099 
+{'fold': 4, 'epoch': 60, 'train_loss': 0.086, 'val_loss': -0.87, 'train_acc': 0.809, 'val_acc': 0.747, 'mean_acc': 0.811}
+Model saved at epoch 64 ,val_loss is -0.9359179735183716, val_acc is 0.7834549878345499 
+{'fold': 4, 'epoch': 70, 'train_loss': 0.081, 'val_loss': -0.967, 'train_acc': 0.822, 'val_acc': 0.764, 'mean_acc': 0.811}
+{'fold': 4, 'epoch': 80, 'train_loss': 0.078, 'val_loss': -0.858, 'train_acc': 0.839, 'val_acc': 0.74, 'mean_acc': 0.811}
+Model saved at epoch 84 ,val_loss is -0.9116961359977722, val_acc is 0.7931873479318735 
+{'fold': 4, 'epoch': 90, 'train_loss': 0.076, 'val_loss': -0.816, 'train_acc': 0.834, 'val_acc': 0.71, 'mean_acc': 0.811}
+Model saved at epoch 92 ,val_loss is -0.7864125370979309, val_acc is 0.8175182481751825 
+Model saved at epoch 98 ,val_loss is -0.954110324382782, val_acc is 0.8248175182481752 
+{'fold': 4, 'epoch': 100, 'train_loss': 0.071, 'val_loss': -0.93, 'train_acc': 0.856, 'val_acc': 0.798, 'mean_acc': 0.811}
+{'fold': 4, 'epoch': 110, 'train_loss': 0.065, 'val_loss': -1.013, 'train_acc': 0.862, 'val_acc': 0.8, 'mean_acc': 0.811}
+{'fold': 4, 'epoch': 120, 'train_loss': 0.066, 'val_loss': -0.939, 'train_acc': 0.864, 'val_acc': 0.818, 'mean_acc': 0.811}
+{'fold': 4, 'epoch': 130, 'train_loss': 0.06, 'val_loss': -1.017, 'train_acc': 0.881, 'val_acc': 0.764, 'mean_acc': 0.811}
+{'fold': 4, 'epoch': 140, 'train_loss': 0.056, 'val_loss': -1.177, 'train_acc': 0.888, 'val_acc': 0.803, 'mean_acc': 0.811}
+For fold 4, test acc: 0.785888
+
+Model saved at epoch 1 ,val_loss is 0.0791638195514679, val_acc is 0.49148418491484186 
+Model saved at epoch 2 ,val_loss is 0.09888666123151779, val_acc is 0.5401459854014599 
+{'fold': 5, 'epoch': 10, 'train_loss': 0.122, 'val_loss': 0.128, 'train_acc': 0.675, 'val_acc': 0.538, 'mean_acc': 0.805}
+Model saved at epoch 14 ,val_loss is 0.07370191812515259, val_acc is 0.635036496350365 
+Model saved at epoch 15 ,val_loss is 0.0975632518529892, val_acc is 0.6545012165450121 
+Model saved at epoch 18 ,val_loss is -0.0020621048752218485, val_acc is 0.6861313868613139 
+{'fold': 5, 'epoch': 20, 'train_loss': 0.107, 'val_loss': -0.003, 'train_acc': 0.731, 'val_acc': 0.674, 'mean_acc': 0.805}
+Model saved at epoch 23 ,val_loss is -0.05717649683356285, val_acc is 0.7031630170316302 
+Model saved at epoch 29 ,val_loss is -0.07291088998317719, val_acc is 0.7153284671532847 
+{'fold': 5, 'epoch': 30, 'train_loss': 0.098, 'val_loss': -0.12, 'train_acc': 0.774, 'val_acc': 0.735, 'mean_acc': 0.805}
+Model saved at epoch 30 ,val_loss is -0.11963926255702972, val_acc is 0.7347931873479319 
+{'fold': 5, 'epoch': 40, 'train_loss': 0.09, 'val_loss': -0.077, 'train_acc': 0.795, 'val_acc': 0.703, 'mean_acc': 0.805}
+Model saved at epoch 46 ,val_loss is -0.17249546945095062, val_acc is 0.7420924574209246 
+{'fold': 5, 'epoch': 50, 'train_loss': 0.086, 'val_loss': -0.164, 'train_acc': 0.808, 'val_acc': 0.713, 'mean_acc': 0.805}
+Model saved at epoch 53 ,val_loss is -0.23092101514339447, val_acc is 0.7469586374695864 
+Model saved at epoch 54 ,val_loss is -0.2164658159017563, val_acc is 0.7591240875912408 
+{'fold': 5, 'epoch': 60, 'train_loss': 0.082, 'val_loss': -0.287, 'train_acc': 0.827, 'val_acc': 0.745, 'mean_acc': 0.805}
+Model saved at epoch 61 ,val_loss is -0.3325713872909546, val_acc is 0.7639902676399026 
+Model saved at epoch 62 ,val_loss is -0.3625961244106293, val_acc is 0.7688564476885644 
+Model saved at epoch 63 ,val_loss is -0.345998615026474, val_acc is 0.7785888077858881 
+{'fold': 5, 'epoch': 70, 'train_loss': 0.076, 'val_loss': -0.259, 'train_acc': 0.842, 'val_acc': 0.703, 'mean_acc': 0.805}
+{'fold': 5, 'epoch': 80, 'train_loss': 0.071, 'val_loss': -0.357, 'train_acc': 0.849, 'val_acc': 0.73, 'mean_acc': 0.805}
+{'fold': 5, 'epoch': 90, 'train_loss': 0.069, 'val_loss': -0.44, 'train_acc': 0.857, 'val_acc': 0.754, 'mean_acc': 0.805}
+{'fold': 5, 'epoch': 100, 'train_loss': 0.07, 'val_loss': -0.403, 'train_acc': 0.847, 'val_acc': 0.735, 'mean_acc': 0.805}
+Model saved at epoch 108 ,val_loss is -0.46253547072410583, val_acc is 0.7834549878345499 
+{'fold': 5, 'epoch': 110, 'train_loss': 0.068, 'val_loss': -0.483, 'train_acc': 0.862, 'val_acc': 0.749, 'mean_acc': 0.805}
+{'fold': 5, 'epoch': 120, 'train_loss': 0.064, 'val_loss': -0.463, 'train_acc': 0.87, 'val_acc': 0.74, 'mean_acc': 0.805}
+Model saved at epoch 129 ,val_loss is -0.5241968631744385, val_acc is 0.805352798053528 
+{'fold': 5, 'epoch': 130, 'train_loss': 0.059, 'val_loss': -0.587, 'train_acc': 0.875, 'val_acc': 0.788, 'mean_acc': 0.805}
+{'fold': 5, 'epoch': 140, 'train_loss': 0.061, 'val_loss': -0.567, 'train_acc': 0.873, 'val_acc': 0.776, 'mean_acc': 0.805}
+{'fold': 5, 'epoch': 150, 'train_loss': 0.055, 'val_loss': -0.633, 'train_acc': 0.887, 'val_acc': 0.762, 'mean_acc': 0.805}
+{'fold': 5, 'epoch': 160, 'train_loss': 0.053, 'val_loss': -0.537, 'train_acc': 0.891, 'val_acc': 0.727, 'mean_acc': 0.805}
+{'fold': 5, 'epoch': 170, 'train_loss': 0.048, 'val_loss': -0.777, 'train_acc': 0.904, 'val_acc': 0.798, 'mean_acc': 0.805}
+{'fold': 5, 'epoch': 180, 'train_loss': 0.047, 'val_loss': -0.729, 'train_acc': 0.911, 'val_acc': 0.762, 'mean_acc': 0.805}
+For fold 5, test acc: 0.824818
+
+Model saved at epoch 1 ,val_loss is -0.1842116415500641, val_acc is 0.5109489051094891 
+Model saved at epoch 3 ,val_loss is -0.29196053743362427, val_acc is 0.6082725060827251 
+{'fold': 6, 'epoch': 10, 'train_loss': 0.125, 'val_loss': -0.624, 'train_acc': 0.669, 'val_acc': 0.489, 'mean_acc': 0.809}
+Model saved at epoch 15 ,val_loss is -0.7918452620506287, val_acc is 0.6204379562043796 
+Model saved at epoch 16 ,val_loss is -0.763081431388855, val_acc is 0.681265206812652 
+Model saved at epoch 19 ,val_loss is -0.9705245494842529, val_acc is 0.7031630170316302 
+{'fold': 6, 'epoch': 20, 'train_loss': 0.111, 'val_loss': -0.949, 'train_acc': 0.727, 'val_acc': 0.72, 'mean_acc': 0.809}
+Model saved at epoch 20 ,val_loss is -0.9487503170967102, val_acc is 0.7201946472019465 
+Model saved at epoch 22 ,val_loss is -1.041125774383545, val_acc is 0.7420924574209246 
+Model saved at epoch 23 ,val_loss is -1.000931978225708, val_acc is 0.7493917274939172 
+Model saved at epoch 26 ,val_loss is -1.1402801275253296, val_acc is 0.7615571776155717 
+{'fold': 6, 'epoch': 30, 'train_loss': 0.098, 'val_loss': -1.185, 'train_acc': 0.765, 'val_acc': 0.742, 'mean_acc': 0.809}
+Model saved at epoch 38 ,val_loss is -0.9100269675254822, val_acc is 0.7834549878345499 
+{'fold': 6, 'epoch': 40, 'train_loss': 0.103, 'val_loss': -0.862, 'train_acc': 0.754, 'val_acc': 0.764, 'mean_acc': 0.809}
+Model saved at epoch 42 ,val_loss is -1.2030656337738037, val_acc is 0.7931873479318735 
+Model saved at epoch 43 ,val_loss is -1.187451958656311, val_acc is 0.8029197080291971 
+Model saved at epoch 44 ,val_loss is -1.2951194047927856, val_acc is 0.805352798053528 
+{'fold': 6, 'epoch': 50, 'train_loss': 0.091, 'val_loss': -1.373, 'train_acc': 0.789, 'val_acc': 0.8, 'mean_acc': 0.809}
+Model saved at epoch 53 ,val_loss is -1.0901844501495361, val_acc is 0.8077858880778589 
+{'fold': 6, 'epoch': 60, 'train_loss': 0.087, 'val_loss': -1.333, 'train_acc': 0.804, 'val_acc': 0.815, 'mean_acc': 0.809}
+Model saved at epoch 60 ,val_loss is -1.3331949710845947, val_acc is 0.8150851581508516 
+Model saved at epoch 67 ,val_loss is -1.3024533987045288, val_acc is 0.8223844282238443 
+{'fold': 6, 'epoch': 70, 'train_loss': 0.08, 'val_loss': -1.514, 'train_acc': 0.821, 'val_acc': 0.798, 'mean_acc': 0.809}
+{'fold': 6, 'epoch': 80, 'train_loss': 0.078, 'val_loss': -1.559, 'train_acc': 0.83, 'val_acc': 0.805, 'mean_acc': 0.809}
+{'fold': 6, 'epoch': 90, 'train_loss': 0.079, 'val_loss': -1.321, 'train_acc': 0.825, 'val_acc': 0.818, 'mean_acc': 0.809}
+Model saved at epoch 96 ,val_loss is -1.452936053276062, val_acc is 0.8248175182481752 
+{'fold': 6, 'epoch': 100, 'train_loss': 0.069, 'val_loss': -1.494, 'train_acc': 0.86, 'val_acc': 0.815, 'mean_acc': 0.809}
+{'fold': 6, 'epoch': 110, 'train_loss': 0.076, 'val_loss': -1.375, 'train_acc': 0.836, 'val_acc': 0.798, 'mean_acc': 0.809}
+{'fold': 6, 'epoch': 120, 'train_loss': 0.063, 'val_loss': -1.632, 'train_acc': 0.875, 'val_acc': 0.783, 'mean_acc': 0.809}
+{'fold': 6, 'epoch': 130, 'train_loss': 0.062, 'val_loss': -1.716, 'train_acc': 0.87, 'val_acc': 0.805, 'mean_acc': 0.809}
+{'fold': 6, 'epoch': 140, 'train_loss': 0.062, 'val_loss': -1.844, 'train_acc': 0.875, 'val_acc': 0.815, 'mean_acc': 0.809}
+For fold 6, test acc: 0.819951
+
+Model saved at epoch 1 ,val_loss is -0.13666963577270508, val_acc is 0.5012165450121655 
+Model saved at epoch 3 ,val_loss is -0.13567417860031128, val_acc is 0.5498783454987834 
+{'fold': 7, 'epoch': 10, 'train_loss': 0.122, 'val_loss': -0.082, 'train_acc': 0.676, 'val_acc': 0.521, 'mean_acc': 0.811}
+Model saved at epoch 13 ,val_loss is -0.11190695315599442, val_acc is 0.5523114355231143 
+Model saved at epoch 14 ,val_loss is -0.11521251499652863, val_acc is 0.559610705596107 
+Model saved at epoch 15 ,val_loss is -0.23705492913722992, val_acc is 0.6374695863746959 
+Model saved at epoch 16 ,val_loss is -0.360580176115036, val_acc is 0.7031630170316302 
+Model saved at epoch 18 ,val_loss is -0.4726716876029968, val_acc is 0.7566909975669099 
+{'fold': 7, 'epoch': 20, 'train_loss': 0.109, 'val_loss': -0.543, 'train_acc': 0.721, 'val_acc': 0.735, 'mean_acc': 0.811}
+Model saved at epoch 22 ,val_loss is -0.5737560987472534, val_acc is 0.7615571776155717 
+Model saved at epoch 27 ,val_loss is -0.709797739982605, val_acc is 0.7737226277372263 
+{'fold': 7, 'epoch': 30, 'train_loss': 0.102, 'val_loss': -0.703, 'train_acc': 0.763, 'val_acc': 0.781, 'mean_acc': 0.811}
+Model saved at epoch 30 ,val_loss is -0.7028409242630005, val_acc is 0.781021897810219 
+Model saved at epoch 33 ,val_loss is -0.7420875430107117, val_acc is 0.7834549878345499 
+Model saved at epoch 37 ,val_loss is -0.7649133205413818, val_acc is 0.7956204379562044 
+{'fold': 7, 'epoch': 40, 'train_loss': 0.092, 'val_loss': -0.787, 'train_acc': 0.79, 'val_acc': 0.776, 'mean_acc': 0.811}
+Model saved at epoch 44 ,val_loss is -0.8161568641662598, val_acc is 0.7980535279805353 
+Model saved at epoch 47 ,val_loss is -0.8667335510253906, val_acc is 0.8004866180048662 
+Model saved at epoch 48 ,val_loss is -0.8323666453361511, val_acc is 0.805352798053528 
+{'fold': 7, 'epoch': 50, 'train_loss': 0.089, 'val_loss': -0.809, 'train_acc': 0.804, 'val_acc': 0.81, 'mean_acc': 0.811}
+Model saved at epoch 50 ,val_loss is -0.8089717626571655, val_acc is 0.8102189781021898 
+{'fold': 7, 'epoch': 60, 'train_loss': 0.082, 'val_loss': -0.934, 'train_acc': 0.825, 'val_acc': 0.779, 'mean_acc': 0.811}
+Model saved at epoch 67 ,val_loss is -0.9012303352355957, val_acc is 0.8248175182481752 
+{'fold': 7, 'epoch': 70, 'train_loss': 0.081, 'val_loss': -0.968, 'train_acc': 0.823, 'val_acc': 0.81, 'mean_acc': 0.811}
+{'fold': 7, 'epoch': 80, 'train_loss': 0.074, 'val_loss': -1.103, 'train_acc': 0.846, 'val_acc': 0.815, 'mean_acc': 0.811}
+Model saved at epoch 85 ,val_loss is -1.021465539932251, val_acc is 0.8345498783454988 
+{'fold': 7, 'epoch': 90, 'train_loss': 0.075, 'val_loss': -1.025, 'train_acc': 0.841, 'val_acc': 0.815, 'mean_acc': 0.811}
+{'fold': 7, 'epoch': 100, 'train_loss': 0.069, 'val_loss': -1.05, 'train_acc': 0.859, 'val_acc': 0.835, 'mean_acc': 0.811}
+Model saved at epoch 104 ,val_loss is -1.1522983312606812, val_acc is 0.8369829683698297 
+{'fold': 7, 'epoch': 110, 'train_loss': 0.068, 'val_loss': -1.132, 'train_acc': 0.86, 'val_acc': 0.82, 'mean_acc': 0.811}
+{'fold': 7, 'epoch': 120, 'train_loss': 0.065, 'val_loss': -1.202, 'train_acc': 0.867, 'val_acc': 0.825, 'mean_acc': 0.811}
+Model saved at epoch 124 ,val_loss is -1.2648628950119019, val_acc is 0.8394160583941606 
+{'fold': 7, 'epoch': 130, 'train_loss': 0.06, 'val_loss': -1.283, 'train_acc': 0.873, 'val_acc': 0.825, 'mean_acc': 0.811}
+{'fold': 7, 'epoch': 140, 'train_loss': 0.06, 'val_loss': -1.211, 'train_acc': 0.874, 'val_acc': 0.83, 'mean_acc': 0.811}
+{'fold': 7, 'epoch': 150, 'train_loss': 0.053, 'val_loss': -1.377, 'train_acc': 0.896, 'val_acc': 0.83, 'mean_acc': 0.811}
+Model saved at epoch 151 ,val_loss is -1.3941923379898071, val_acc is 0.8588807785888077 
+{'fold': 7, 'epoch': 160, 'train_loss': 0.051, 'val_loss': -1.412, 'train_acc': 0.9, 'val_acc': 0.805, 'mean_acc': 0.811}
+{'fold': 7, 'epoch': 170, 'train_loss': 0.05, 'val_loss': -1.408, 'train_acc': 0.9, 'val_acc': 0.788, 'mean_acc': 0.811}
+{'fold': 7, 'epoch': 180, 'train_loss': 0.044, 'val_loss': -1.532, 'train_acc': 0.916, 'val_acc': 0.818, 'mean_acc': 0.811}
+{'fold': 7, 'epoch': 190, 'train_loss': 0.053, 'val_loss': -1.474, 'train_acc': 0.888, 'val_acc': 0.83, 'mean_acc': 0.811}
+{'fold': 7, 'epoch': 200, 'train_loss': 0.041, 'val_loss': -1.6, 'train_acc': 0.921, 'val_acc': 0.822, 'mean_acc': 0.811}
+For fold 7, test acc: 0.800487
+
+Model saved at epoch 1 ,val_loss is -0.00424501858651638, val_acc is 0.5158150851581509 
+Model saved at epoch 2 ,val_loss is -0.008010812103748322, val_acc is 0.5255474452554745 
+{'fold': 8, 'epoch': 10, 'train_loss': 0.127, 'val_loss': 0.083, 'train_acc': 0.642, 'val_acc': 0.506, 'mean_acc': 0.809}
+Model saved at epoch 14 ,val_loss is 0.007624989841133356, val_acc is 0.5547445255474452 
+Model saved at epoch 15 ,val_loss is -0.04993250221014023, val_acc is 0.6034063260340633 
+Model saved at epoch 16 ,val_loss is -0.06352563202381134, val_acc is 0.6277372262773723 
+Model saved at epoch 17 ,val_loss is -0.13385732471942902, val_acc is 0.6666666666666666 
+Model saved at epoch 18 ,val_loss is -0.1752886027097702, val_acc is 0.6861313868613139 
+Model saved at epoch 19 ,val_loss is -0.2242155373096466, val_acc is 0.7153284671532847 
+{'fold': 8, 'epoch': 20, 'train_loss': 0.119, 'val_loss': -0.202, 'train_acc': 0.69, 'val_acc': 0.696, 'mean_acc': 0.809}
+Model saved at epoch 23 ,val_loss is -0.2531537413597107, val_acc is 0.7177615571776156 
+Model saved at epoch 24 ,val_loss is -0.30154362320899963, val_acc is 0.7226277372262774 
+Model saved at epoch 26 ,val_loss is -0.285920113325119, val_acc is 0.7250608272506083 
+Model saved at epoch 27 ,val_loss is -0.311158150434494, val_acc is 0.7274939172749392 
+Model saved at epoch 29 ,val_loss is -0.34666141867637634, val_acc is 0.7372262773722628 
+{'fold': 8, 'epoch': 30, 'train_loss': 0.103, 'val_loss': -0.368, 'train_acc': 0.753, 'val_acc': 0.727, 'mean_acc': 0.809}
+Model saved at epoch 33 ,val_loss is -0.3988419473171234, val_acc is 0.7396593673965937 
+Model saved at epoch 36 ,val_loss is -0.44332581758499146, val_acc is 0.7493917274939172 
+{'fold': 8, 'epoch': 40, 'train_loss': 0.097, 'val_loss': -0.491, 'train_acc': 0.77, 'val_acc': 0.745, 'mean_acc': 0.809}
+Model saved at epoch 41 ,val_loss is -0.49253949522972107, val_acc is 0.754257907542579 
+Model saved at epoch 49 ,val_loss is -0.47660893201828003, val_acc is 0.7615571776155717 
+{'fold': 8, 'epoch': 50, 'train_loss': 0.096, 'val_loss': -0.518, 'train_acc': 0.78, 'val_acc': 0.754, 'mean_acc': 0.809}
+Model saved at epoch 52 ,val_loss is -0.540370762348175, val_acc is 0.7761557177615572 
+Model saved at epoch 55 ,val_loss is -0.5817315578460693, val_acc is 0.781021897810219 
+Model saved at epoch 58 ,val_loss is -0.5777379274368286, val_acc is 0.7883211678832117 
+{'fold': 8, 'epoch': 60, 'train_loss': 0.086, 'val_loss': -0.629, 'train_acc': 0.804, 'val_acc': 0.771, 'mean_acc': 0.809}
+Model saved at epoch 65 ,val_loss is -0.6324514746665955, val_acc is 0.8004866180048662 
+{'fold': 8, 'epoch': 70, 'train_loss': 0.093, 'val_loss': -0.501, 'train_acc': 0.768, 'val_acc': 0.791, 'mean_acc': 0.809}
+{'fold': 8, 'epoch': 80, 'train_loss': 0.083, 'val_loss': -0.693, 'train_acc': 0.818, 'val_acc': 0.783, 'mean_acc': 0.809}
+{'fold': 8, 'epoch': 90, 'train_loss': 0.076, 'val_loss': -0.664, 'train_acc': 0.836, 'val_acc': 0.766, 'mean_acc': 0.809}
+{'fold': 8, 'epoch': 100, 'train_loss': 0.076, 'val_loss': -0.861, 'train_acc': 0.836, 'val_acc': 0.769, 'mean_acc': 0.809}
+{'fold': 8, 'epoch': 110, 'train_loss': 0.07, 'val_loss': -0.878, 'train_acc': 0.856, 'val_acc': 0.776, 'mean_acc': 0.809}
+For fold 8, test acc: 0.776156
+
+Model saved at epoch 1 ,val_loss is 0.07533083111047745, val_acc is 0.46715328467153283 
+Model saved at epoch 7 ,val_loss is 0.03829675540328026, val_acc is 0.4768856447688564 
+{'fold': 9, 'epoch': 10, 'train_loss': 0.122, 'val_loss': -0.028, 'train_acc': 0.685, 'val_acc': 0.53, 'mean_acc': 0.805}
+Model saved at epoch 10 ,val_loss is -0.027967257425189018, val_acc is 0.5304136253041363 
+Model saved at epoch 15 ,val_loss is -0.1353180855512619, val_acc is 0.6180048661800487 
+Model saved at epoch 16 ,val_loss is -0.2539074420928955, val_acc is 0.6690997566909975 
+Model saved at epoch 17 ,val_loss is -0.3621567487716675, val_acc is 0.7226277372262774 
+Model saved at epoch 18 ,val_loss is -0.37428101897239685, val_acc is 0.7396593673965937 
+{'fold': 9, 'epoch': 20, 'train_loss': 0.108, 'val_loss': -0.426, 'train_acc': 0.728, 'val_acc': 0.718, 'mean_acc': 0.805}
+Model saved at epoch 21 ,val_loss is -0.4391303062438965, val_acc is 0.754257907542579 
+Model saved at epoch 23 ,val_loss is -0.40698179602622986, val_acc is 0.7591240875912408 
+Model saved at epoch 25 ,val_loss is -0.4225234389305115, val_acc is 0.7688564476885644 
+Model saved at epoch 27 ,val_loss is -0.4981198012828827, val_acc is 0.7737226277372263 
+Model saved at epoch 28 ,val_loss is -0.5056289434432983, val_acc is 0.7858880778588808 
+Model saved at epoch 29 ,val_loss is -0.4721197485923767, val_acc is 0.7907542579075426 
+{'fold': 9, 'epoch': 30, 'train_loss': 0.099, 'val_loss': -0.503, 'train_acc': 0.773, 'val_acc': 0.791, 'mean_acc': 0.805}
+Model saved at epoch 38 ,val_loss is -0.5249179601669312, val_acc is 0.8004866180048662 
+{'fold': 9, 'epoch': 40, 'train_loss': 0.097, 'val_loss': -0.612, 'train_acc': 0.777, 'val_acc': 0.796, 'mean_acc': 0.805}
+Model saved at epoch 45 ,val_loss is -0.6995449662208557, val_acc is 0.805352798053528 
+Model saved at epoch 48 ,val_loss is -0.7262821793556213, val_acc is 0.8077858880778589 
+Model saved at epoch 49 ,val_loss is -0.7267133593559265, val_acc is 0.8223844282238443 
+{'fold': 9, 'epoch': 50, 'train_loss': 0.086, 'val_loss': -0.839, 'train_acc': 0.806, 'val_acc': 0.798, 'mean_acc': 0.805}
+Model saved at epoch 57 ,val_loss is -0.8131097555160522, val_acc is 0.8248175182481752 
+Model saved at epoch 58 ,val_loss is -0.8363034129142761, val_acc is 0.8272506082725061 
+{'fold': 9, 'epoch': 60, 'train_loss': 0.086, 'val_loss': -0.797, 'train_acc': 0.812, 'val_acc': 0.803, 'mean_acc': 0.805}
+Model saved at epoch 64 ,val_loss is -0.8440152406692505, val_acc is 0.8369829683698297 
+Model saved at epoch 69 ,val_loss is -0.9360074400901794, val_acc is 0.8418491484184915 
+{'fold': 9, 'epoch': 70, 'train_loss': 0.077, 'val_loss': -0.907, 'train_acc': 0.842, 'val_acc': 0.832, 'mean_acc': 0.805}
+Model saved at epoch 73 ,val_loss is -0.8911347389221191, val_acc is 0.8442822384428224 
+Model saved at epoch 78 ,val_loss is -0.9286016225814819, val_acc is 0.8467153284671532 
+{'fold': 9, 'epoch': 80, 'train_loss': 0.075, 'val_loss': -0.912, 'train_acc': 0.846, 'val_acc': 0.805, 'mean_acc': 0.805}
+{'fold': 9, 'epoch': 90, 'train_loss': 0.07, 'val_loss': -1.052, 'train_acc': 0.856, 'val_acc': 0.832, 'mean_acc': 0.805}
+{'fold': 9, 'epoch': 100, 'train_loss': 0.067, 'val_loss': -1.057, 'train_acc': 0.86, 'val_acc': 0.818, 'mean_acc': 0.805}
+{'fold': 9, 'epoch': 110, 'train_loss': 0.076, 'val_loss': -0.885, 'train_acc': 0.835, 'val_acc': 0.835, 'mean_acc': 0.805}
+{'fold': 9, 'epoch': 120, 'train_loss': 0.065, 'val_loss': -1.116, 'train_acc': 0.861, 'val_acc': 0.832, 'mean_acc': 0.805}
+For fold 9, test acc: 0.778589
+
+Model saved at epoch 1 ,val_loss is 0.05469139665365219, val_acc is 0.5085158150851582 
+Model saved at epoch 2 ,val_loss is 0.05886109918355942, val_acc is 0.5863746958637469 
+{'fold': 10, 'epoch': 10, 'train_loss': 0.121, 'val_loss': 0.076, 'train_acc': 0.68, 'val_acc': 0.511, 'mean_acc': 0.802}
+Model saved at epoch 14 ,val_loss is 0.20830926299095154, val_acc is 0.6326034063260341 
+Model saved at epoch 17 ,val_loss is 0.16997721791267395, val_acc is 0.6472019464720195 
+Model saved at epoch 19 ,val_loss is 0.08013622462749481, val_acc is 0.6958637469586375 
+{'fold': 10, 'epoch': 20, 'train_loss': 0.108, 'val_loss': 0.091, 'train_acc': 0.731, 'val_acc': 0.65, 'mean_acc': 0.802}
+Model saved at epoch 21 ,val_loss is -0.013431012630462646, val_acc is 0.7226277372262774 
+Model saved at epoch 22 ,val_loss is -0.0428420789539814, val_acc is 0.7469586374695864 
+Model saved at epoch 23 ,val_loss is -0.07499410212039948, val_acc is 0.7518248175182481 
+{'fold': 10, 'epoch': 30, 'train_loss': 0.101, 'val_loss': -0.083, 'train_acc': 0.76, 'val_acc': 0.752, 'mean_acc': 0.802}
+{'fold': 10, 'epoch': 40, 'train_loss': 0.102, 'val_loss': -0.06, 'train_acc': 0.764, 'val_acc': 0.752, 'mean_acc': 0.802}
+Model saved at epoch 47 ,val_loss is -0.10099732875823975, val_acc is 0.7591240875912408 
+{'fold': 10, 'epoch': 50, 'train_loss': 0.093, 'val_loss': -0.053, 'train_acc': 0.783, 'val_acc': 0.759, 'mean_acc': 0.802}
+Model saved at epoch 56 ,val_loss is -0.10725671797990799, val_acc is 0.7639902676399026 
+{'fold': 10, 'epoch': 60, 'train_loss': 0.088, 'val_loss': -0.031, 'train_acc': 0.808, 'val_acc': 0.762, 'mean_acc': 0.802}
+Model saved at epoch 61 ,val_loss is -0.10365734249353409, val_acc is 0.781021897810219 
+{'fold': 10, 'epoch': 70, 'train_loss': 0.082, 'val_loss': -0.099, 'train_acc': 0.821, 'val_acc': 0.735, 'mean_acc': 0.802}
+Model saved at epoch 73 ,val_loss is -0.25684142112731934, val_acc is 0.7931873479318735 
+{'fold': 10, 'epoch': 80, 'train_loss': 0.081, 'val_loss': -0.157, 'train_acc': 0.827, 'val_acc': 0.742, 'mean_acc': 0.802}
+Model saved at epoch 84 ,val_loss is -0.30086278915405273, val_acc is 0.7980535279805353 
+Model saved at epoch 87 ,val_loss is -0.320298433303833, val_acc is 0.8102189781021898 
+{'fold': 10, 'epoch': 90, 'train_loss': 0.078, 'val_loss': -0.289, 'train_acc': 0.835, 'val_acc': 0.774, 'mean_acc': 0.802}
+{'fold': 10, 'epoch': 100, 'train_loss': 0.075, 'val_loss': -0.352, 'train_acc': 0.84, 'val_acc': 0.803, 'mean_acc': 0.802}
+{'fold': 10, 'epoch': 110, 'train_loss': 0.081, 'val_loss': -0.343, 'train_acc': 0.812, 'val_acc': 0.788, 'mean_acc': 0.802}
+Model saved at epoch 111 ,val_loss is -0.4300057590007782, val_acc is 0.8175182481751825 
+Model saved at epoch 116 ,val_loss is -0.4217930734157562, val_acc is 0.8199513381995134 
+{'fold': 10, 'epoch': 120, 'train_loss': 0.065, 'val_loss': -0.436, 'train_acc': 0.866, 'val_acc': 0.791, 'mean_acc': 0.802}
+Model saved at epoch 124 ,val_loss is -0.47954583168029785, val_acc is 0.8223844282238443 
+{'fold': 10, 'epoch': 130, 'train_loss': 0.062, 'val_loss': -0.492, 'train_acc': 0.875, 'val_acc': 0.827, 'mean_acc': 0.802}
+Model saved at epoch 130 ,val_loss is -0.491661936044693, val_acc is 0.8272506082725061 
+Model saved at epoch 132 ,val_loss is -0.5600245594978333, val_acc is 0.8369829683698297 
+{'fold': 10, 'epoch': 140, 'train_loss': 0.06, 'val_loss': -0.544, 'train_acc': 0.878, 'val_acc': 0.83, 'mean_acc': 0.802}
+Model saved at epoch 142 ,val_loss is -0.5812658071517944, val_acc is 0.8442822384428224 
+{'fold': 10, 'epoch': 150, 'train_loss': 0.056, 'val_loss': -0.566, 'train_acc': 0.887, 'val_acc': 0.822, 'mean_acc': 0.802}
+{'fold': 10, 'epoch': 160, 'train_loss': 0.053, 'val_loss': -0.566, 'train_acc': 0.897, 'val_acc': 0.803, 'mean_acc': 0.802}
+{'fold': 10, 'epoch': 170, 'train_loss': 0.051, 'val_loss': -0.713, 'train_acc': 0.9, 'val_acc': 0.8, 'mean_acc': 0.802}
+{'fold': 10, 'epoch': 180, 'train_loss': 0.05, 'val_loss': -0.682, 'train_acc': 0.905, 'val_acc': 0.805, 'mean_acc': 0.802}
+{'fold': 10, 'epoch': 190, 'train_loss': 0.051, 'val_loss': -0.699, 'train_acc': 0.892, 'val_acc': 0.769, 'mean_acc': 0.802}
+For fold 10, test acc: 0.812652
+
+
+Test Accuracy: 80.3163 ± 2.0048, Duration: 165.7210
+
+
+All Splits Test Accuracies: [0.8394160583941606, 0.805352798053528, 0.7883211678832117, 0.7858880778588808, 0.8248175182481752, 0.8199513381995134, 0.8004866180048662, 0.7761557177615572, 0.7785888077858881, 0.8126520681265207]
+
