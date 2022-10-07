@@ -55,9 +55,8 @@ class SAPNet(nn.Module):
 
     def reset_parameters(self):
         self.fea_embed.apply(tools.weight_reset)
-        if self.smu_flag:
-            for m in self.smus:
-                m.reset_parameters()
+        for m in self.smus:
+            m.reset_parameters()
         all_res = [self.cnn_net, self.vlr, self.mgl]
         for res in all_res:
             if res != None:
